@@ -1,6 +1,16 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
+
+#signup {
+    background-color: transparent;
+}
+
+#linkform {
+    cursor: pointer;
+}
+
+
 /*
 
 * {
@@ -78,7 +88,3 @@ header img {
 }
 
 */
-
-#signup {
-    background-color: transparent;
-}

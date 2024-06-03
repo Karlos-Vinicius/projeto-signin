@@ -11,7 +11,7 @@
         <div class="row mb-3">
             <label for="inome" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" name="email" id="inome">
+                <input type="email" class="form-control" name="email" id="iemail">
             </div>
         </div>
 
@@ -28,7 +28,7 @@
         </div>
 
         <p>
-            <a c-target="#form" c-get="{{ url_for('entering.signup') }}">Cadastrar-se</a>
+            <a id="linkform" c-target="#form" c-get="{{ url_for('entering.signup') }}">Cadastrar-se</a>
         </p>
 
 
@@ -37,7 +37,7 @@
     {% if error %}
  
         <div class="alert alert-warning" role="alert">
-            <strong>Email e/ou senha errados</strong>. Por favor, verifique os dados e tente novamente.
+            <strong>Email e/ou senha errado(s)</strong>. Por favor, verifique os campos e tente novamente.
         </div>
 
     {% endif %}

@@ -27,17 +27,27 @@ def signin():
     return redirect(url_for("entering.signin", error=True))
 
 
-@entering.route("/certo")
-def certo(): 
-    return "<p>Tudo certo</p>"
-
-
-@entering.route("/errado")
-def errado():
-    return "<p>Senha e/ou email errado</p>"
-
-
 @entering.route("/signup", methods=["GET", "POST"])
 def signup():
-    return render_template("signup.html")
+    if request.method == "GET":
+       return render_template("signup.html")
+    
+    user = request.json
+    name = user["name"]
+    email = user["email"]
+    password = user["password"]
+    cpassword = user["cpassword"]
+
+    if password != cpassword:
+        return render_template("signup.html", error=True)
+    
+    if not name or not email or not password or not cpassword:
+        return render_template("signup.html", error=True)
+    
+    return redirect(url_for("entering.see_users"))
+
+
+@entering.route("/see_users")
+def see_users():
+    return "Tudo certo meu chapa"
 
