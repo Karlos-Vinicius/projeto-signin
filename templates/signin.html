@@ -1,0 +1,45 @@
+<section id="sign">
+    <h2>Sign In</h2>
+    <form 
+        class="c-form" 
+        action="{{ url_for('entering.signin') }}" 
+        method="POST" 
+        c-target="#form"
+        c-reset="true">
+
+
+        <div class="row mb-3">
+            <label for="inome" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" name="email" id="inome">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="ipassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" name="password" class="form-control" id="ipassword">
+            </div>
+        </div>
+        
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="submit">Button</button>
+        </div>
+
+        <p>
+            <a c-target="#form" c-get="{{ url_for('entering.signup') }}">Cadastrar-se</a>
+        </p>
+
+
+    </form>
+
+    {% if error %}
+ 
+        <div class="alert alert-warning" role="alert">
+            <strong>Email e/ou senha errados</strong>. Por favor, verifique os dados e tente novamente.
+        </div>
+
+    {% endif %}
+
+</section>
