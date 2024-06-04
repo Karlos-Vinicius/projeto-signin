@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, request, render_template, url_for
-from database.user import USERS
+from database.models.user import User
 
 
 entering = Blueprint("entering", __name__)
@@ -19,7 +19,8 @@ def signin():
 
     user = request.json
 
-    for client in USERS:
+    users = User.get()
+    for client in users:
         if user["email"] == client["email"] and \
            user["password"] == client["password"]:
             return render_template("final_page.html")
@@ -45,8 +46,8 @@ def signup():
         return render_template("signup.html", error=True)
 
 
-    new_user = {"id": len(USERS) + 1, "name": name, "email": email, "password": password}
-    USERS.append(new_user)
+    user = User(name=name, email=email, password=password)
+    user.save()
 
     return render_template("final_page.html")
 
@@ -54,5 +55,6 @@ def signup():
 # Será removido posteriormente
 @entering.route("/list_users")
 def list_users():
-    return render_template("list_users.html", users=USERS)
+    users = User.get()
+    return render_template("list_users.html", users=users)
 
