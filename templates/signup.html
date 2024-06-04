@@ -81,4 +81,12 @@
 
     </form>
 
+    {% if error %}
+ 
+        <div class="alert alert-danger" role="alert">
+            <strong>Erro no envio do formulário</strong>. Por favor, tente novamente!
+        </div>
+
+    {% endif %}
+
 </section>

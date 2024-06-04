@@ -14,7 +14,7 @@ def signin():
                return render_template("signin.html", error=error) 
         except:
             ...
-        
+
         return render_template("signin.html")
 
     user = request.json
@@ -22,8 +22,8 @@ def signin():
     for client in USERS:
         if user["email"] == client["email"] and \
            user["password"] == client["password"]:
-            return redirect(url_for("entering.signup"))     
-            
+            return render_template("final_page.html")
+ 
     return redirect(url_for("entering.signin", error=True))
 
 
@@ -31,7 +31,7 @@ def signin():
 def signup():
     if request.method == "GET":
        return render_template("signup.html")
-    
+
     user = request.json
     name = user["name"]
     email = user["email"]
@@ -40,14 +40,19 @@ def signup():
 
     if password != cpassword:
         return render_template("signup.html", error=True)
-    
+
     if not name or not email or not password or not cpassword:
         return render_template("signup.html", error=True)
-    
-    return redirect(url_for("entering.see_users"))
 
 
-@entering.route("/see_users")
-def see_users():
-    return "Tudo certo meu chapa"
+    new_user = {"id": len(USERS) + 1, "name": name, "email": email, "password": password}
+    USERS.append(new_user)
+
+    return render_template("final_page.html")
+
+
+# Será removido posteriormente
+@entering.route("/list_users")
+def list_users():
+    return render_template("list_users.html", users=USERS)
 
